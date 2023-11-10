@@ -1,0 +1,38 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:TAREA2.Dtos"
+             x:Class="TAREA2.MainPage">
+
+    <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="15" Margin="15">
+        <Label Grid.Row="0" Text="Lista de empleados" FontSize="Subtitle" TextColor="#4E944F" HorizontalOptions="Center" VerticalOptions="Start" />
+        <ScrollView Grid.Row="1" Grid.RowSpan="2">
+            <CollectionView ItemsSource="{Binding ListaPersona}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:model:PersonaDTO">
+                        <Grid RowDefinitions="Auto,Auto"
+                              ColumnDefinitions="Auto,*">
+                            <Image Grid.RowSpan="2"  Grid.Column="0" Source="{Binding RutaImagen}" WidthRequest="100" HeightRequest="100" Aspect="AspectFill"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Nombre}" FontAttributes="Bold" TextColor="Black" Margin="10,10,10,10" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Descripcion}" TextColor="Black" Margin="10,10,10,10"  />
+                            <Label Grid.Row="2" Grid.Column="1" Padding="10,15,0,5" Text="Editar" TextColor="#4E944F" Margin="10,10,0,10" >
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer  Command="{Binding BindingContext.EditarCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Grid.Row="2" Grid.Column="1" Padding="10,15,0,5" Text="Eliminar" TextColor="Red" HorizontalOptions="End">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.EliminarCommand, Source={x:RelativeSource AncestorType={x:Type ContentPage}}}" CommandParameter="{Binding}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <Button Grid.Row="3" Text="Nuevo Empleado" Command="{Binding CrearCommand}" WidthRequest="200" HeightRequest="50" BackgroundColor="#4E944F" TextColor="White" />
+    </Grid>
+</ContentPage>

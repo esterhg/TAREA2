@@ -1,0 +1,23 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TAREA2.PersonaPage"
+             BackgroundColor="White">
+    <ScrollView>
+        <VerticalStackLayout Padding="15">
+            <ActivityIndicator IsRunning="{Binding LoadingEsVisible}"  IsVisible="{Binding LoadingEsVisible}" Color="#4E944F" HeightRequest="30" />
+            <Image x:Name="imgFoto" WidthRequest="200" HeightRequest="200" Source="{Binding ImgFoto, Mode=TwoWay}" />
+            <Button Text="Tomar Foto" Command="{Binding TomarFotoCommand}" BackgroundColor="#4E944F" CornerRadius="10" TextColor="White" WidthRequest="200" HeightRequest="50" />
+            <Label Text="Nombre" FontSize="15" />
+            <Entry Placeholder="Ingrese su nombre...." FontSize="15" Margin="0,0,0,10" Text="{Binding PersonaDTO.Nombre}" />
+
+            <Label Text="Descripcion" FontSize="15" />
+            <Entry Placeholder="Ingrese la descripción...." FontSize="15" Margin="0,0,0,10" Text="{Binding PersonaDTO.Descripcion}" />
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="20">
+                <Button Text="Guardar" Command="{Binding GuardarCommand}" BackgroundColor="#4E944F" CornerRadius="10" TextColor="White" WidthRequest="100" HeightRequest="70" />
+            </StackLayout>
+
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
